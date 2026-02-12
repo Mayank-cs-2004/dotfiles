@@ -1,0 +1,40 @@
+# --- LAYOUT: Floating Centered Box ---
+anchor = center
+width = 500
+height = 350
+
+# --- STYLING: Rounded Corners & Border ---
+corner-radius = 16
+border-width = 0
+outline-width = 1
+outline-color = #000000
+
+# --- TEXT & SPACING ---
+# This pads the text *inside* the box, not the box itself
+padding-left = 35
+padding-top = 35
+result-spacing = 25
+num-results = 6
+
+# --- FONTS ---
+font = UbuntuMono Nerd Font
+font-size = 16
+
+# --- COLORS ---
+# Dark background with high transparency (AA = alpha)
+# If you have blur enabled in Hyprland, this looks like frosted glass.
+background-color = #232323EE
+
+# Text Colors
+text-color = #dadada
+prompt-text = "  :  "
+prompt-color = #1793d1
+
+# --- SELECTION STYLING ---
+selection-color = #1793d1
+selection-match-color = #ff9e64  # Highlights the letters you type in orange
+
+# Optional: Add a subtle background behind the selected item
+selection-background = #101010ee
+selection-background-corner-radius = 10
+selection-background-padding = 10

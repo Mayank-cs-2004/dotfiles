@@ -1,0 +1,248 @@
+/* =============================================================================
+   WAYBAR CLEAN CONFIGURATION
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. GLOBAL RESET & WINDOW
+   ----------------------------------------------------------------------------- */
+* {
+    font-family: "UbuntuMono Nerd Font", monospace;
+    font-weight: bold;
+    font-size: 19px;
+    min-height: 25px;
+}
+
+window#waybar {
+    background: transparent; /* No background for the bar itself */
+    color: #1793d1;
+}
+
+/* -----------------------------------------------------------------------------
+   2. MODULE BASE STYLES
+   (Applies to all standard modules to give them the dark grey background)
+   ----------------------------------------------------------------------------- */
+#window,
+#clock,
+#tray,
+#workspaces,
+#mpris,
+#memory, #cpu,
+#pulseaudio, #pulseaudio.microphone,
+#battery, #backlight, #bluetooth, #network, #custom-notification, #idle_inhibitor {
+    background: #232323;
+    padding: 0px 10px;
+    margin-top: 4px;       /* Adds a tiny gap from top of screen */
+    margin-bottom: 0px;
+}
+
+/* -----------------------------------------------------------------------------
+   3. LEFT MODULES (Workspaces, Clock, Stats)
+   ----------------------------------------------------------------------------- */
+#workspaces {
+    border-radius: 10px;
+    padding: 0px 5px;
+    margin-right: 10px;
+}
+
+#workspaces button {
+    padding: 5px;
+}
+
+#workspaces button.active {
+    color: #1793d1;        /* Active Workspace: Blue */
+    background-color: #2b2b2b;
+    border-radius: 5px;
+}
+
+#workspaces button.focused {
+    color: #ffffff;
+}
+
+#workspaces button.urgent {
+    color: #232323;
+    background-color: #ff1a1a;
+    border-radius: 5px;
+}
+
+#clock {
+    color: #ffffff;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 0px;
+}
+
+/* --- Hardware Group (Linked: Memory -> CPU) --- */
+#memory {
+    color: #00e279;        /* Green */
+    border-radius: 10px 0px 0px 10px;
+    margin-right: 0px;
+}
+
+#cpu {
+    color: #00e279;        /* Green */
+    border-radius: 0px 10px 10px 0px;
+    margin-left: 0px;
+    margin-right: 10px;    /* Gap after this group */
+}
+
+/* -----------------------------------------------------------------------------
+   4. CENTER MODULES
+   ----------------------------------------------------------------------------- */
+#window {
+    border-radius: 10px;
+}
+
+/* -----------------------------------------------------------------------------
+   5. RIGHT MODULES
+   ----------------------------------------------------------------------------- */
+
+/* --- Standalone Items --- */
+#tray {
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#mpris {
+    color: #ff007b;        /* Pink */
+    border-radius: 10px 0px 0px 10px; /* Round Left, Flat Right */
+    min-width: 5px;
+    padding: 0px 10px; 
+}
+
+/* --- The Status Pill (Linked: Mic -> Network) --- */
+/* 1. Start (Left) */
+
+.modules-right > widget:first-child > #pulseaudio.microphone {
+    border-radius: 10px 0px 0px 10px;
+} 
+
+ #pulseaudio.microphone {
+    color: #ca38ff;
+} 
+
+/* 2. Middle Items (No Radius) */
+#pulseaudio {
+    color: #ffe600;        /* Yellow */
+    border-radius: 0px;
+    margin: 4px 0px 0px 0px;
+}
+
+#battery {
+    color: #00ff41;        /* Green */
+    border-radius: 0px;
+    margin: 4px 0px 0px 0px;
+}
+
+#backlight {
+    color: #ff9900;        /* Orange */
+    border-radius: 0px;
+    margin: 4px 0px 0px 0px;
+}
+
+#bluetooth {
+    color: #ff1a1a;        /* Red */
+    border-radius: 0px;
+    margin: 4px 0px 0px 0px;
+}
+
+#network {
+    color: #00ffff;        /* Cyan */
+    margin-left: 0px;
+}
+
+/* 3. End (Right) */
+#idle_inhibitor {
+    padding-right: 20px;
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px;    /* Space from screen edge */
+    color: #a6adc8; 
+}
+
+#idle_inhibitor.activated {
+    color: #fab387; 
+}
+
+/* GLOBAL FONT */
+* {
+    font-family: "UbuntuMono Nerd Font", monospace;
+    font-weight: bold;
+}
+
+/* THE MAIN PANEL BACKGROUND */
+.control-center {
+    background: #232323;
+    border: 2px solid #1793d1;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* WIDGET: TITLE & CLEAR BUTTON */
+.widget-title {
+    color: #ffffff;
+    background: #232323;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+.widget-title > button {
+    background: #1793d1;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: bold;
+}
+
+.widget-title > button:hover {
+    background: #ffffff;
+}
+
+/* WIDGET: DO NOT DISTURB TOGGLE */
+.widget-dnd {
+    background: #2b2b2b;
+    margin: 0px 15px 10px 15px; /* Side margins to align with cards */
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.widget-dnd > switch {
+    background: #444444;
+    border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+    background: #1793d1; /* Blue when ON */
+}
+
+/* WIDGET: NOTIFICATION CARDS */
+.notification-row {
+    outline: none;
+    margin: 5px 10px;
+}
+
+.notification-row .notification-background {
+    background: #2b2b2b; /* Card Color */
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.notification-row .notification-background .notification-title {
+    color: #1793d1;      /* Blue Title */
+    font-size: 15px;
+}
+
+.notification-row .notification-background .notification-body {
+    color: #dadada;
+}
+
+/* ACTION BUTTONS (Reply/Open) */
+.notification-row .notification-action-buttons > button {
+    background: #1793d1;
+    color: #000000;
+    border-radius: 5px;
+    margin-top: 5px;
+}

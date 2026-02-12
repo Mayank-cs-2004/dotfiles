@@ -21,3 +21,23 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # --- 4. Your Visuals ---
 eval "$(starship init zsh)"
 fastfetch
+
+# --- Backup Script for github dotfiles ---
+backup() {
+    echo "backing up dotfiles..."
+    
+    # 1. Update the files in the backup folder
+    cp ~/.zshrc ~/dotfiles/
+    rm -rf ~/dotfiles/hypr && cp -r ~/.config/hypr ~/dotfiles/
+    pacman -Qqe > ~/dotfiles/packages.txt
+    
+    # 2. Send to GitHub
+    cd ~/dotfiles
+    git add .
+    git commit -m "Update: $(date)"
+    git push
+    
+    # 3. Go back to where you were
+    cd -
+    echo "Backup complete!"
+}

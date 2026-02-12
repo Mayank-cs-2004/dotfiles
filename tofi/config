@@ -1,0 +1,23 @@
+# Layout
+width = 100%
+height = 100%
+border-width = 0
+outline-width = 0
+padding-top = 35%
+padding-left = 35%
+padding-right = 35%
+result-spacing = 25
+num-results = 5
+
+# Text & Font
+font = UbuntuMono Nerd Font
+font-size = 10
+prompt-text = "   Search... "
+prompt-padding = 0
+
+# Colors (Catppuccin Mocha-ish)
+background-color = #1e1e2eCC
+text-color = #cdd6f4
+selection-color = #f9e2af
+selection-background = #00000000
+selection-match-color = #f9e2af
