@@ -42,17 +42,17 @@ Welcome to my personal configuration files (dotfiles). This setup is focused on 
 │   ├── tofi/          # Launcher theme
 │   ├── yazi/          # File manager config
 │   ├── fastfetch/     # System fetch config
-│   ├── starship.toml  # Shell prompt
+│   ├── screenshots/   # Screenshots 
 │   ├── mimeapps.list  # Default app associations
-│   └── gtk-3.0/       # GTK Theme settings
+│   ├── gtk-3.0/       # GTK Theme settings
+│   └── starship.toml  # Shell prompt
 ├── .zshrc             # Zsh configuration
 ├── .zprofile          # Autostart Hyprland logic
 ├── .gitconfig         # Git identity
-└── packages.txt       # List of installed packages
-
+├── packages.txt       # List of installed packages
+└── Wallpaper.jpg      # Default wallpaper
 🚀 Installation
 1. Clone the Repository
-Bash
 
 git clone [https://github.com/YOUR_USERNAME/dotfiles.git](https://github.com/YOUR_USERNAME/dotfiles.git) ~/dotfiles
 cd ~/dotfiles
@@ -60,7 +60,6 @@ cd ~/dotfiles
 2. Install Packages
 
 Install the official packages using the saved list:
-Bash
 
 sudo pacman -S --needed - < packages.txt
 
@@ -68,7 +67,6 @@ sudo pacman -S --needed - < packages.txt
 3. Restore Configurations
 
 Warning: This will overwrite your existing configs. Back them up if needed.
-Bash
 
 # 1. Link the config folders
 cp -r .config/* ~/.config/
