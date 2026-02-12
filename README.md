@@ -51,6 +51,9 @@ Welcome to my personal configuration files (dotfiles). This setup is focused on 
 ├── .gitconfig         # Git identity
 ├── packages.txt       # List of installed packages
 └── Wallpaper.jpg      # Default wallpaper
+
+---
+
 🚀 Installation
 1. Clone the Repository
 
