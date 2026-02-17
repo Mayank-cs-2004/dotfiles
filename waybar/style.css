@@ -1,89 +1,77 @@
 /* =============================================================================
-   WAYBAR CLEAN CONFIGURATION
+   WAYBAR & SWAYNC CONFIGURATION
    ============================================================================= */
 
 /* -----------------------------------------------------------------------------
    1. GLOBAL RESET & WINDOW
    ----------------------------------------------------------------------------- */
 * {
-    font-family: "UbuntuMono Nerd Font", monospace;
+    font-family: "Roboto", "JetBrainsMono Nerd Font";
     font-weight: bold;
-    font-size: 19px;
-    min-height: 25px;
+    font-size: 22px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 window#waybar {
-    background: transparent; /* No background for the bar itself */
+    background: transparent; 
     color: #1793d1;
 }
 
 /* -----------------------------------------------------------------------------
    2. MODULE BASE STYLES
-   (Applies to all standard modules to give them the dark grey background)
    ----------------------------------------------------------------------------- */
-#window,
-#clock,
-#tray,
-#workspaces,
-#mpris,
-#memory, #cpu,
-#pulseaudio, #pulseaudio.microphone,
-#battery, #backlight, #bluetooth, #network, #custom-notification, #idle_inhibitor {
-    background: #232323;
-    padding: 0px 10px;
-    margin-top: 4px;       /* Adds a tiny gap from top of screen */
-    margin-bottom: 0px;
+#window, #clock, #workspaces, #mpris, #memory, #cpu, #pulseaudio, 
+#pulseaudio.microphone, #battery, #backlight, #bluetooth, #network, 
+#custom-notification, #idle_inhibitor,#custom-power {
+    background: rgba(35, 35, 35, 0.9);
+    margin-top: 0px;       
+    margin-bottom: 0px;  
 }
 
 /* -----------------------------------------------------------------------------
-   3. LEFT MODULES (Workspaces, Clock, Stats)
+   3. LEFT MODULES 
    ----------------------------------------------------------------------------- */
-#workspaces {
+#clock {
+    color: #ffffff;
     border-radius: 10px;
-    padding: 0px 5px;
+    padding: 0px 12px; /* PERFECT OUTER PADDING */
+    margin-left: 10px;
     margin-right: 10px;
 }
 
-#workspaces button {
-    padding: 5px;
-}
-
-#workspaces button.active {
-    color: #1793d1;        /* Active Workspace: Blue */
-    background-color: #2b2b2b;
-    border-radius: 5px;
-}
-
-#workspaces button.focused {
+/* --- Hardware Group --- */
+#memory {
     color: #ffffff;
+    border-radius: 10px 0px 0px 10px;
+    padding-left: 12px; /* Matches clock's left edge */
+    padding-right: 6px; /* Half-gap for the middle */
 }
 
+#cpu {
+    color: #ffffff;
+    border-radius: 0px 10px 10px 0px;
+    padding-left: 6px;  /* Half-gap for the middle */
+    padding-right: 12px; /* Matches clock's right edge */
+}
+
+#workspaces {
+    border-radius: 10px;
+    padding: 0px 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#workspaces button { 
+    padding: 0px 6px; 
+}
+
+#workspaces button.active { color: #1793d1; }
+#workspaces button.focused { color: #ffffff; }
 #workspaces button.urgent {
     color: #232323;
     background-color: #ff1a1a;
     border-radius: 5px;
-}
-
-#clock {
-    color: #ffffff;
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    padding-left: 0px;
-}
-
-/* --- Hardware Group (Linked: Memory -> CPU) --- */
-#memory {
-    color: #00e279;        /* Green */
-    border-radius: 10px 0px 0px 10px;
-    margin-right: 0px;
-}
-
-#cpu {
-    color: #00e279;        /* Green */
-    border-radius: 0px 10px 10px 0px;
-    margin-left: 0px;
-    margin-right: 10px;    /* Gap after this group */
 }
 
 /* -----------------------------------------------------------------------------
@@ -91,85 +79,62 @@ window#waybar {
    ----------------------------------------------------------------------------- */
 #window {
     border-radius: 10px;
+    padding: 0px 12px; /* Matches clock */
 }
 
 /* -----------------------------------------------------------------------------
-   5. RIGHT MODULES
+   5. RIGHT MODULES (The Status Pill)
    ----------------------------------------------------------------------------- */
-
-/* --- Standalone Items --- */
-#tray {
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
+/* Left Edge */
 #mpris {
-    color: #ff007b;        /* Pink */
-    border-radius: 10px 0px 0px 10px; /* Round Left, Flat Right */
-    min-width: 5px;
-    padding: 0px 10px; 
+    color: #ca38ff;
+    border-radius: 10px 0px 0px 10px; 
+    padding-left: 12px;  /* Outer padding (keep larger) */
+    padding-right: 10px; /* Inner spacing to next icon */
+    margin-left: 10px;
 }
 
-/* --- The Status Pill (Linked: Mic -> Network) --- */
-/* 1. Start (Left) */
-
+/* Fallback Left Edge (If MPRIS is hidden) */
 .modules-right > widget:first-child > #pulseaudio.microphone {
     border-radius: 10px 0px 0px 10px;
+    padding-left: 12px; 
 } 
 
- #pulseaudio.microphone {
-    color: #ca38ff;
-} 
-
-/* 2. Middle Items (No Radius) */
-#pulseaudio {
-    color: #ffe600;        /* Yellow */
+/* --- Shared Middle Items Setup --- */
+/* FIX: Adjusted padding here controls the space between icons */
+#pulseaudio.microphone, #pulseaudio, #battery, #backlight, 
+#bluetooth, #network, #custom-notification {
     border-radius: 0px;
-    margin: 4px 0px 0px 0px;
-}
-
-#battery {
-    color: #00ff41;        /* Green */
-    border-radius: 0px;
-    margin: 4px 0px 0px 0px;
-}
-
-#backlight {
-    color: #ff9900;        /* Orange */
-    border-radius: 0px;
-    margin: 4px 0px 0px 0px;
-}
-
-#bluetooth {
-    color: #ff1a1a;        /* Red */
-    border-radius: 0px;
-    margin: 4px 0px 0px 0px;
-}
-
-#network {
-    color: #00ffff;        /* Cyan */
     margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px 10px;
 }
 
-/* 3. End (Right) */
+/* --- Individual Colors --- */
+#pulseaudio.microphone { color: #ff703c; } 
+#pulseaudio            { color: #0066ff; }
+#battery               { color: #00ff41; }
+#backlight             { color: #ffe600; }
+#bluetooth             { color: #ff3870; }
+#network               { color: #00ffff; }
+#custom-notification   { color: #ffaa00; }
+#custom-power          { color: #ffffff; } 
+
+/* Right Edge of the pill */
 #idle_inhibitor {
-    padding-right: 20px;
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;    /* Space from screen edge */
     color: #a6adc8; 
+    padding-left: 10px;
+    padding-right: 20px;    
 }
 
 #idle_inhibitor.activated {
     color: #fab387; 
 }
 
-/* GLOBAL FONT */
-* {
-    font-family: "UbuntuMono Nerd Font", monospace;
-    font-weight: bold;
-}
+/* =============================================================================
+   6. SWAYNC (NOTIFICATION CENTER) STYLES
+   ============================================================================= */
 
-/* THE MAIN PANEL BACKGROUND */
 .control-center {
     background: #232323;
     border: 2px solid #1793d1;
@@ -177,7 +142,6 @@ window#waybar {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* WIDGET: TITLE & CLEAR BUTTON */
 .widget-title {
     color: #ffffff;
     background: #232323;
@@ -192,17 +156,13 @@ window#waybar {
     border: none;
     border-radius: 6px;
     padding: 5px 12px;
-    font-weight: bold;
 }
 
-.widget-title > button:hover {
-    background: #ffffff;
-}
+.widget-title > button:hover { background: #ffffff; }
 
-/* WIDGET: DO NOT DISTURB TOGGLE */
 .widget-dnd {
     background: #2b2b2b;
-    margin: 0px 15px 10px 15px; /* Side margins to align with cards */
+    margin: 0px 15px 10px 15px; 
     padding: 5px 10px;
     border-radius: 8px;
     color: #ffffff;
@@ -213,36 +173,51 @@ window#waybar {
     border-radius: 12px;
 }
 
-.widget-dnd > switch:checked {
-    background: #1793d1; /* Blue when ON */
-}
+.widget-dnd > switch:checked { background: #1793d1; }
 
-/* WIDGET: NOTIFICATION CARDS */
 .notification-row {
     outline: none;
     margin: 5px 10px;
 }
 
 .notification-row .notification-background {
-    background: #2b2b2b; /* Card Color */
+    background: #2b2b2b; 
     color: #ffffff;
     border-radius: 8px;
     padding: 10px;
 }
 
 .notification-row .notification-background .notification-title {
-    color: #1793d1;      /* Blue Title */
+    color: #1793d1;      
     font-size: 15px;
 }
 
-.notification-row .notification-background .notification-body {
-    color: #dadada;
-}
+.notification-row .notification-background .notification-body { color: #dadada; }
 
-/* ACTION BUTTONS (Reply/Open) */
 .notification-row .notification-action-buttons > button {
     background: #1793d1;
     color: #000000;
     border-radius: 5px;
     margin-top: 5px;
+}
+
+/* -----------------------------------------------------------------------------
+   7. TOOLTIP STYLES
+   ----------------------------------------------------------------------------- */
+tooltip {
+    background: rgba(35, 35, 35, 0.9);       
+    border-radius: 20px;
+}
+
+tooltip label {
+    font-size: 19px;       
+    color: #ffffff;           
+    font-family: "Roboto";     
+    margin-top: 5px;               
+}
+
+#custom-power {
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 15px;
+    padding-left: 10px;
 }

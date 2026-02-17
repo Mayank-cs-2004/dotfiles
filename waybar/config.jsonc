@@ -17,7 +17,6 @@
         "hyprland/window"
     ],
     "modules-right": [
-        "tray",
         "mpris",
         "pulseaudio#microphone",
         "pulseaudio",
@@ -26,7 +25,8 @@
         "bluetooth",
         "network",
         "custom/notification",
-        "idle_inhibitor"
+        "idle_inhibitor",
+        "custom/power"
     ],
 
     // -------------------------------------------------------------------------
@@ -34,8 +34,8 @@
     // -------------------------------------------------------------------------
 
     "hyprland/window": {
-        "format": " 󰣇 {} ",  // Shows the active window title with an icon
-        "max-length": 50,    // <--- THIS IS THE FIX. Try 30 or 40.
+        "format": "󰣇 <span size='12pt'>{}</span>",  // Shows the active window title with an icon
+        "max-length": 35,    // <--- THIS IS THE FIX. Try 30 or 40.
         "separate-outputs": true,
         "rewrite": {
         // If the title contains "GitHub", replace it all with this:
@@ -60,11 +60,6 @@
     // SYSTEM STATUS & CLOCK
     // -------------------------------------------------------------------------
 
-    "tray": {
-        "icon-size": 13,
-        "spacing": 10
-    },
-
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -74,7 +69,7 @@
     },
 
     "clock": {
-        "format": "  {0:%d %b %a}    {0:%H:%M}",
+        "format": "<span foreground='#97e800'></span> <span size='12pt'>{0:%a %d %b}</span>  <span foreground='#97e800'></span>  <span size='12pt'>{0:%H:%M}</span>",
         "interval": 1,
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -95,52 +90,58 @@
     // -------------------------------------------------------------------------
 
     "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-"
+        "format": " {icon} ",
+        "tooltip": true,
+        "tooltip-format": "Brightness: {percent}%",
+        // Added 󰝣 for true 0%
+        "format-icons": ["󰄰", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-"
     },
 
     "battery": {
         "states": {
-            "good": 95,
+            "good": 90,
             "warning": 30,
-            "critical": 20
+            "critical": 15
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}", // Click to see time remaining
-        "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format": "{icon}",
+    "format-charging": "",
+    "format-plugged": "",
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip": true,
+    "tooltip-format": "Battery: {capacity}%"
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": false,
-        "format-muted": " Muted",
-        "on-click": "pamixer -t",      // Toggle Mute
-        "on-scroll-up": "pamixer -i 1", // Volume Up
-        "on-scroll-down": "pamixer -d 1", // Volume Down
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["","", "", ""]
+    "format": "{icon} ",
+    "tooltip": true,
+    "tooltip-format": "{volume}%",
+    "format-muted": " ",
+    "on-click": "pamixer -t",      // Toggle Mute
+    "on-scroll-up": "pamixer -i 5", // Volume Up
+    "on-scroll-down": "pamixer -d 5", // Volume Down
+    "scroll-step": 5,
+    "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", "", ""]
         }
     },
-
     "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "  Muted",
-        "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
+    "format": "{format_source} ",
+    "format-source": "",
+    "format-source-muted": "",
+    "tooltip": true,
+    "tooltip-format": "{source_volume}%",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 5",
+    "on-scroll-down": "pamixer --default-source -d 5",
+    "scroll-step": 5
     },
 
     // -------------------------------------------------------------------------
@@ -154,44 +155,41 @@
             "m": 30
         },
         "interval": 10,
-        "format": "󰾆 {used}GB",
-        "format-m": "󰾅 {used}GB",
-        "format-h": "󰓅 {used}GB",
-        "format-c": " {used}GB",
-        "format-alt": "󰾆 {percentage}%", // Click to toggle between GB and %
+        "format": "<span foreground='#ff1a1a'>󰾆</span> <span size='12pt'>{used}GB  </span>",
+        "format-m": "<span foreground='#ff1a1a'>󰾅</span> <span size='12pt'>{used}GB  </span>",
+        "format-h": "<span foreground='#ff1a1a'>󰓅</span> <span size='12pt'>{used}GB  </span>",
+        "format-c": "<span foreground='#ff1a1a'></span> <span size='12pt'>{used}GB  </span>",
         "max-length": 10,
         "tooltip": true,
-        "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
+        "tooltip-format": "󰾆   {percentage}%\n   {used:0.1f}GB/{total:0.1f}GB"
     },
 
     "cpu": {
         "interval": 10,
-        "format": "󰍛 {usage}%",
-        "format-alt": "{icon0}{icon1}{icon2}{icon3}",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+        "format": "<span foreground='#ff1a1a'>󰍛</span> <span size='12pt'>{usage}%</span>"
     },
 
     "bluetooth": {
-        "format": "󰂰 {status}",
-        "format-on": "󰂰 On",           // Icon + Capitalized Text
-        "format-off": "󰂰 Off",         // Crossed out icon + Text
-        "format-disabled": "󰂰 Off", // Crossed out icon + Text
-        "format-connected": "󰂰 {device_alias}", // Shows device name when connected
+        "format": "󰂯",
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "rfkill toggle bluetooth",   // Left click = Toggle On/Off
-        "on-click-right": "blueman-manager"      // Right click = Open Menu
+        "on-click": "rfkill toggle bluetooth",
+        "on-click-right": "blueman-manager"
     },
     "network": {
         "tooltip": true,
-        "format-wifi": "󰤨 {essid:.6}",
+        "format-wifi": "󰤨 ",
         "format-ethernet": "󰤨 ",
-        "format-linked": "󰤨 {ifname} (No IP)",
+        "format-linked": "󰤨 ",
         "format-disconnected": "󰤨 ",
         "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
         "tooltip-format-disconnected": "Disconnected",
-        "format-alt": "<span foreground='#99ffdd'>󰤨 {bandwidthDownBytes}</span> <span foreground='#ffcc66'>󰤨 {bandwidthUpBytes}</span>",
+        "format-alt": "<span foreground='#99ffdd'>󰤨  {bandwidthDownBytes}</span> <span foreground='#ffcc66'>󰤨  {bandwidthUpBytes}</span>",
         "interval": 2,
         
         // --- THIS IS THE CHANGE ---
@@ -199,28 +197,18 @@
         "on-click-right": "foot -e nmtui" 
     },
     "mpris": {
-    // 1. Just the Player Icon and the Status Icon (Play/Pause)
-    "format": "{player_icon} {status_icon}",
-    "format-paused": "{player_icon} {status_icon}",
+    "format": "{status_icon} ",
+    "format-paused": "{status_icon} ",
+    "tooltip-format": "Song: {title}\nArtist: {artist}\nAlbum: {album}",
     
-    // 2. This handles the click action
     "on-click": "playerctl play-pause",
+
+        "status-icons": {
+            "playing": "<span size='16000'>⏸</span>", 
+            "paused": "<span size='11000'>▶︎</span>"
+        }
+    },
     
-    // 3. Define the icons you want to see
-    "player-icons": {
-        "default": "<span size='15000'></span>",
-        "mpv": "<span size='15000'>🎵</span>",
-        "spotify": "<span size='15000'>󰖟</span>",
-        "firefox": "<span size='15000'></span>"
-    },
-    "status-icons": {
-        "playing": "<span size='15000'>⏸</span>", 
-        "paused": "<span size='15000'>▶</span>",
-        "stopped": "<span size='15000'></span>"
-    },
-    // 4. Ensure it doesn't get cut off
-    "max-length": 30
-    },
     "custom/notification": {
         "tooltip": false,
         "format": "{icon} {text}",
@@ -240,5 +228,11 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
+    },
+
+    "custom/power": {
+    "format": "<span size='20pt'>⏻</span>  ",
+    "tooltip": false,
+    "on-click": "wlogout --protocol layer-shell -b 2 -T 54 -R 5 -B 850 -L 1550"
     }
 }

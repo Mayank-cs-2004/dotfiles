@@ -17,39 +17,41 @@ window {
 
 /* 3. BUTTONS (General Styling) */
 button {
-    /* Roundness of the button corners */
-    border-radius: 20px;
-    
-    /* Border settings (Dark Grey, 1px thick) */
-    border-color: #232323;
-    border-style: solid;
-    border-width: 1px;
+    /* Roundness */
+    border-radius: 15px;
 
-    /* Colors: Dark Grey background, White text */
-    background-color: #232323;
+    /* Colors */
+    background-color: rgba(35, 35, 35, 0.9);
     color: #FFFFFF;
 
     /* Spacing between buttons */
-    margin: 5px;
+    margin: 2px;
 
-    /* SIZE FIX: Forces all buttons to be at least this wide so they match */
-    min-width: 150px;
+    /* SIZE: Make them wide enough for text */
+    min-width: 10px;
+    min-height: 1px;
 
-    /* Typography (Font, Boldness, Size) */
-    font-family: "UbuntuMono Nerd Font";
-    font-weight: 800;
-    font-size: 20px;
+    /* TYPOGRAPHY */
+    font-family: "Roboto", monospace;
+    font-weight: bold;
+    font-size: 18px;  /* Reduced from 30px to fit better */
+
+    /* ALIGNMENT FIX (Crucial Step) */
+    padding-top: 10px;
+    padding-bottom: 18px;
+    padding-left: 40px;
     
-    /* Icon Alignment: Centered horizontally, slightly up (40%) vertically */
+    /* ICON POSITIONING (Crucial Step) */
     background-repeat: no-repeat;
-    background-position: center 40%;
+    background-position: 20px center; /* Icon stays 25px from the left edge */
+    background-size: 0px;            /* Sets a consistent icon size */
 }
 
 /* 4. HOVER EFFECTS
    Changes color when you mouse over or click a button. */
 button:active, 
 button:hover {
-    background-color: #383838;      /* Lighter grey on hover */
+    background-color: #656565;      /* Lighter grey on hover */
     outline-style: none;            /* Removes the ugly focus outline */
     transition: background-color 0.2s ease-in-out; /* Smooth fade animation */
 }
@@ -61,30 +63,30 @@ button:hover {
 
 #lock {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/lock.png"));
-    background-size: 1.1cm;
+    background-size: 0.5cm;
 }
 
 #logout {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/logout.png"));
-    background-size: 1.1cm;
+    background-size: 0.5cm;
 }
 
 #suspend {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/suspend.png"));
-    background-size: 1.1cm;
+    background-size: 0.5cm;
 }
 
 #hibernate {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/hibernate.png"));
-    background-size: 1.1cm;
+    background-size: 0.45cm;
 }
 
 #shutdown {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/power.png"));
-    background-size: 1.1cm;
+    background-size: 0.6cm;
 }
 
 #reboot {
     background-image: image(url("/home/kuro/.config/wlogout/icons/assets/restart.png"));
-    background-size: 1.1cm;
+    background-size: 0.5cm;
 }
