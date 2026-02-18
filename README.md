@@ -1,4 +1,4 @@
-# Kuro's Arch + Hyprland Dotfiles
+# Arch + Hyprland Dotfiles
 
 ![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-00A4C7?style=for-the-badge&logo=hyprland&logoColor=white)
