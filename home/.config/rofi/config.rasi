@@ -16,7 +16,7 @@ configuration {
     drun-display-format:         "{name}";
     window-format:               "{w} · {c} · {t}";
     terminal:                    "foot";
-    run-command:                 "/home/kuro/.config/scripts/smart-run.sh {cmd}";
+    run-command:                 "{cmd}"; 
     hover-select:                true;
     kb-cancel:                   "Escape,MousePrimary"; 
 
