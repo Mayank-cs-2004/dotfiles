@@ -37,19 +37,11 @@ window#waybar {
 /* Middle Pills */
 #workspaces, 
 #window,
-#battery {
+#mpris {
     background-color: @base_dark;
     border-radius:    8px;
     padding:          8px 8px;       /* Controls the vertical thickness */
     margin:           2px 6px 2px 0; /* 6px right margin creates pill gap */
-}
-
-#mpris {
-    font-size:        18px;
-    background-color: @base_dark;
-    border-radius:    8px;
-    padding:          8px 8px;       
-    margin:           2px 6px 2px 0; 
 }
 
 /* Far Left Pill */
@@ -58,14 +50,6 @@ window#waybar {
     border-radius:    8px;
     padding:          8px 8px 8px 9px;
     margin:           2px 6px 2px 5px; /* Locked to 5px from the left monitor edge */
-}
-
-/* Far Right Pill */
-#custom-notification {
-    background-color: @base_dark;
-    border-radius:    8px;
-    padding:          8px 8px; 
-    margin:           2px 5px 2px 0;   /* Locked to 5px from the right monitor edge */
 }
 
 
@@ -92,7 +76,44 @@ window#waybar {
 
 
 /* =========================================================================
- * 4. INTERACTIVE ELEMENTS (WORKSPACES)
+ * 4. MERGED PILLS (SYSTEM STATUS)
+ * Battery | Notification | Caffeine — single continuous pill on the far right.
+ * ========================================================================= */
+
+/* Left: Battery */
+#battery {
+    background-color: @base_dark;
+    border-radius:    8px 0 0 8px;   /* Curves ONLY the left corners */
+    padding:          8px 2px 8px 8px; /* 2px right padding for internal breathing room */
+    margin:           2px 0;         /* 0 right margin so it touches Notification */
+}
+
+/* Middle: Notification */
+#custom-notification {
+    background-color: @base_dark;
+    border-radius:    0;             /* No curves — seamlessly merged */
+    padding:          8px 2px;       /* 2px horizontal padding for internal breathing room */
+    margin:           2px 0;
+}
+
+/* Right: Caffeine */
+#custom-caffeine {
+    background-color: @base_dark;
+    border-radius:    0 8px 8px 0;   /* Curves ONLY the right corners */
+    padding:          8px 8px 8px 2px; /* 2px left padding for internal breathing room */
+    margin:           2px 5px 2px 0; /* Locked to 5px from the right monitor edge */
+}
+
+/* Caffeine ON state (hypridle killed / sleep prevented) — warm amber icon */
+#custom-caffeine.caffeine-on {
+    color: #ffaa00;
+}
+
+/* Caffeine OFF state (hypridle running / sleep allowed) — inherits default @text_off_white */
+
+
+/* =========================================================================
+ * 5. INTERACTIVE ELEMENTS (WORKSPACES)
  * Controls how the workspace buttons react to clicks and mouse hovers.
  * ========================================================================= */
 
@@ -118,7 +139,7 @@ window#waybar {
 
 
 /* =========================================================================
- * 5. SYSTEM TOOLTIPS
+ * 6. SYSTEM TOOLTIPS
  * Popups that appear when hovering over the clock, hardware, or icons.
  * ========================================================================= */
 tooltip {
